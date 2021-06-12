@@ -239,6 +239,9 @@ Our mission is to provide the most powerful no-code interface for databases whic
     * Create a new relation
         - Create foreign key in child table
         - Update metadata
+        - GUI
+            - 
+        
     * Existing
         - We need to show existing relation
         - Update metadata
@@ -253,5 +256,7 @@ Our mission is to provide the most powerful no-code interface for databases whic
         - Create and add 
     * Pagination
     * Remove child
+    
+    
     
 
