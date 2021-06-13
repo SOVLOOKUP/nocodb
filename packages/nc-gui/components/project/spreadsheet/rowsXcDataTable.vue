@@ -67,12 +67,15 @@
       </x-btn>
 
 
-      <fields v-model="showFields" :field-list="fieldList"
+      <fields
+        v-model="showFields"
+        :field-list="fieldList"
               :meta="meta"
               :is-locked="isLocked"
               :fieldsOrder.sync="fieldsOrder"
               :sqlUi="sqlUi"
-              :showSystemFields.sync="showSystemFields"></fields>
+              :showSystemFields.sync="showSystemFields"
+      />
 
       <sort-list
         :is-locked="isLocked"
@@ -576,7 +579,6 @@ export default {
       console.log(e)
     }
     this.searchField = this.primaryValueColumn;
-
     this.dataLoaded = true;
 
     // await this.loadViews();
@@ -723,7 +725,7 @@ export default {
       } else {
         try {
           if (!this.api) return;
-          const id = this.meta.columns.filter((c) => c.pk).map(c => rowObj[c._cn]).join(',');
+          const id = this.meta.columns.filter((c) => c.pk).map(c => rowObj[c._cn]).join('___');
           await this.api.update(id, {
             [column._cn]: rowObj[column._cn]
           }, {[column._cn]: oldRow[column._cn]})
@@ -744,7 +746,7 @@ export default {
       try {
         const rowObj = this.rowContextMenu.row;
         if (!this.rowContextMenu.rowMeta.new) {
-          const id = this.meta && this.meta.columns && this.meta.columns.filter((c) => c.pk).map(c => rowObj[c._cn]).join(',');
+          const id = this.meta && this.meta.columns && this.meta.columns.filter((c) => c.pk).map(c => rowObj[c._cn]).join('___');
           await this.api.delete(id);
         }
         this.data.splice(this.rowContextMenu.index, 1);
@@ -762,7 +764,7 @@ export default {
             continue;
           }
           if (!rowMeta.new) {
-            const id = this.meta.columns.filter((c) => c.pk).map(c => rowObj[c._cn]).join(',');
+            const id = this.meta.columns.filter((c) => c.pk).map(c => rowObj[c._cn]).join('___');
             await this.api.delete(id);
           }
           this.data.splice(row, 1);
